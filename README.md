@@ -1,6 +1,6 @@
 # ip_info
 
-A new Flutter package project.
+A simple wrapper for ipify.org API
 
 ## Getting Started
 

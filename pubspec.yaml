@@ -1,8 +1,8 @@
 name: ip_info
-description: A new Flutter package project.
+description: A simple wrapper for ipify.org-Api
 version: 0.0.1
 author:
-homepage:
+homepage: https://github.com/jannikhst/ip_info.git
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.12.2
+    
 
 dev_dependencies:
   flutter_test:
