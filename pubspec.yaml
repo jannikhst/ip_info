@@ -1,6 +1,6 @@
 name: ip_info
-description: A simple wrapper for ipify.org-Api and ip-api.com. Find out your public IP-Adress and Location Details.
-version: 0.0.2
+description: A simple wrapper for Free Apis
+version: 0.0.3
 author:
 homepage: https://github.com/jannikhst/ip_info.git
 
