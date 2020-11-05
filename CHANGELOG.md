@@ -1,3 +1,8 @@
+## [0.0.4] - 2020-11-05
+
+* Added fingerprinting feature
+* Removed hashing method
+
 ## [0.0.3] - 2020-11-04
 
 * Changed location query to https

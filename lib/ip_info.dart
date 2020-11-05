@@ -1,8 +1,11 @@
 library ip_info;
 
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:platform_detect/platform_detect.dart' as pd;
 
 class IPInfo {
   static Uri _ipv4 = Uri.parse('https://api.ipify.org?format=text');
@@ -11,23 +14,23 @@ class IPInfo {
 
   /// Returns [Future<String>] if there is an existing ipv4, else returns null
   static Future<String> get ipv4 async {
-    var response = await http.get(_ipv4);
-    if (response.statusCode == 200)
-      return response.body;
-    else
-      return null;
+    try {
+      var response = await http.get(_ipv4);
+      if (response.statusCode == 200) return response.body;
+    } catch (e) {}
+    return null;
   }
 
   /// Returns [Future<String>] if there is an existing ipv6, else returns null
   static Future<String> get ipv6 async {
-    var response = await http.get(_ipv6);
-    if (response.statusCode == 200)
-      return response.body;
-    else
-      return null;
+    try {
+      var response = await http.get(_ipv6);
+      if (response.statusCode == 200) return response.body;
+    } catch (e) {}
+    return null;
   }
 
-  /// Returns [Future<String>] if is an valid location, else returns null
+  /// Returns [Future<String>] if there is no error , else returns null
   static Future<String> get location async {
     var response = await http.get(_locate);
     if (response.statusCode != 200) return null;
@@ -35,12 +38,10 @@ class IPInfo {
     return '${json['country_name']}, ${json['region']}, ${json['city']}, ${json['postal']}';
   }
 
-  /// Returns [Future<int>] hash from both ips
-  static Future<int> get hash async {
-    var v4 = await ipv4, v6 = await ipv6;
-    if (v4 != null && v6 != null)
-      return int.parse('${v4.hashCode}${v6.hashCode}');
-    else
-      return null;
+  ///<Beta> Returns fingerprint for the current user as hashvalue [int].
+  static int fingerprint(BuildContext context) {
+    final fingerprint =
+        '${pd.browser}${pd.operatingSystem}${DateTime.now().timeZoneName}${MediaQuery.of(context).size.height}${MediaQuery.of(context).size.width}${MediaQuery.of(context).size.aspectRatio}';
+    return fingerprint.hashCode;
   }
 }
